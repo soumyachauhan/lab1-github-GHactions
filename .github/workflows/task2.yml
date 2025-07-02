@@ -3,7 +3,7 @@ name: Print Repo and Student Info
 on:
   push:
     paths:
-      - student_note.md 
+      - student_note.md  # Run only when this file is modified
 
 jobs:
   print-info:
@@ -15,11 +15,13 @@ jobs:
 
       - name: Set environment variables
         run: |
-          echo "STUDENT_USERNAME=${{ github.actor }}" >> $GITHUB_ENV
           echo "REPO_NAME=${{ github.repository }}" >> $GITHUB_ENV
+          echo "STUDENT_USERNAME=${{ github.actor }}" >> $GITHUB_ENV
 
-      - name: Print repo name
+      - name: Print repository name
         run: echo "Repository: $REPO_NAME"
+        shell: bash
 
       - name: Print student username
         run: echo "Student Username: $STUDENT_USERNAME"
+        shell: bash
