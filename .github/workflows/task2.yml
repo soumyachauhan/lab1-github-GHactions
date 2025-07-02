@@ -3,18 +3,20 @@ name: Print Repo and Student Info
 on:
   push:
     paths:
-      - student_note.md  # Only trigger if this file changes
+      - student_note.md 
 
 jobs:
   print-info:
     runs-on: ubuntu-latest
-    env:
-      STUDENT_USERNAME: ${{ github.actor }}
-      REPO_NAME: ${{ github.repository }}
 
     steps:
       - name: Checkout code
         uses: actions/checkout@v3
+
+      - name: Set environment variables
+        run: |
+          echo "STUDENT_USERNAME=${{ github.actor }}" >> $GITHUB_ENV
+          echo "REPO_NAME=${{ github.repository }}" >> $GITHUB_ENV
 
       - name: Print repo name
         run: echo "Repository: $REPO_NAME"
