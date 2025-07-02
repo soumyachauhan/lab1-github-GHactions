@@ -3,7 +3,7 @@ name: Print Repo and Student Info
 on:
   push:
     paths:
-      - student_note.md  # Run only when this file is modified
+      - student_note.md
 
 jobs:
   print-info:
@@ -13,15 +13,7 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v3
 
-      - name: Set environment variables
+      - name: Print repo name and student username
         run: |
-          echo "REPO_NAME=${{ github.repository }}" >> $GITHUB_ENV
-          echo "STUDENT_USERNAME=${{ github.actor }}" >> $GITHUB_ENV
-
-      - name: Print repository name
-        run: echo "Repository: $REPO_NAME"
-        shell: bash
-
-      - name: Print student username
-        run: echo "Student Username: $STUDENT_USERNAME"
-        shell: bash
+          echo "Repository: ${{ github.repository }}"
+          echo "Student Username: ${{ github.actor }}"
