@@ -1,0 +1,19 @@
+name: Print Repo and Student Info
+
+on:
+  push:
+    paths:
+      - student_note.md
+
+jobs:
+  print-info:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      - name: Print repo name and student username
+        run: |
+          echo "Repository: ${{ github.repository }}"
+          echo "Student Username: ${{ github.actor }}"
